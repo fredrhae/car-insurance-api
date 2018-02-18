@@ -8,10 +8,11 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Builder
-@Getter
-@Setter
+@Data
 @ToString
 @EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 @Table(name = "quote")
@@ -24,11 +25,11 @@ public class Quote implements Serializable{
     @Column(name = "quot_id")
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
 

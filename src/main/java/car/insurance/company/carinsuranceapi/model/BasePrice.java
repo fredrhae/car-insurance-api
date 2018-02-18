@@ -8,8 +8,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 @Builder
-@Getter
-@Setter
+@Data
 @ToString
 @EqualsAndHashCode
 @AllArgsConstructor
