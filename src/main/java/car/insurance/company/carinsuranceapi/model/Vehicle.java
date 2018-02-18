@@ -9,10 +9,11 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 @Builder
-@Getter
-@Setter
+@Data
 @ToString
 @EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 @Table(name = "vehicle")

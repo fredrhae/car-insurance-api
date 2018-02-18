@@ -2,6 +2,7 @@ package car.insurance.company.carinsuranceapi.repository;
 
 import car.insurance.company.carinsuranceapi.model.BasePrice;
 import car.insurance.company.carinsuranceapi.model.enumerator.VehicleType;
+import car.insurance.company.carinsuranceapi.utils.EntitiesGeneratorHelper;
 import com.fasterxml.jackson.databind.ser.Serializers;
 import org.hamcrest.Matchers;
 import org.junit.Before;
@@ -31,7 +32,7 @@ public class BasePriceRepositoryTest {
     public void setUp() throws Exception {
         IntStream.range(0,10)
                 .forEach(i -> {
-                    BasePrice basePriceSaved = basePriceRepository.save(generateBasePrice4Test());
+                    BasePrice basePriceSaved = basePriceRepository.save(EntitiesGeneratorHelper.generateBasePrice4Test());
                     if(i == 5){
                         basePrice4Test = basePriceSaved;
                     }
@@ -75,16 +76,5 @@ public class BasePriceRepositoryTest {
         basePriceRepository.deleteAll();
         List<BasePrice> basePriceList = basePriceRepository.findAll();
         assertEquals(0, basePriceList.size());
-    }
-    private BasePrice generateBasePrice4Test(){
-        Random newRandom = new Random();
-        return BasePrice.builder()
-                    .year(LocalDate.of(2000 + newRandom.nextInt(18),10,10))
-                    .type(VehicleType.CAR)
-                    .incidentAvgYear(1 + newRandom.nextDouble())
-                    .model("Any model")
-                    .make("Any make")
-                    .basePrice(1000.0 + newRandom.nextInt(1000))
-                    .build();
     }
 }

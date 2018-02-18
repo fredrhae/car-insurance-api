@@ -1,6 +1,7 @@
 package car.insurance.company.carinsuranceapi.model;
 
 import car.insurance.company.carinsuranceapi.model.enumerator.Gender;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -9,10 +10,11 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Builder
-@Getter
-@Setter
+@Data
 @ToString
 @EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 @Table(name ="customer")
@@ -22,8 +24,12 @@ public class Customer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cust_ssn")
-    private String ssn;
+    @JsonIgnore
+    @Column(name = "cust_id")
+    private Long id;
+
+    @Column(name = "cust_ssn", nullable = false, unique = true)
+    private Long ssn;
 
     @Column(name = "cust_name")
     private String name;
