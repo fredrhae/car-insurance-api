@@ -32,7 +32,7 @@ public class GenderTest {
 
     @Test
     public void getDescription() {
-        assertEquals("Male", Gender.MALE.getDescription());
-        assertEquals("Female", Gender.FEMALE.getDescription());
+        assertEquals("male", Gender.MALE.getDescription());
+        assertEquals("female", Gender.FEMALE.getDescription());
     }
 }

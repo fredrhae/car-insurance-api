@@ -3,6 +3,8 @@ package car.insurance.company.carinsuranceapi.service;
 import car.insurance.company.carinsuranceapi.model.BasePrice;
 import car.insurance.company.carinsuranceapi.model.Vehicle;
 import car.insurance.company.carinsuranceapi.repository.BasePriceRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,8 @@ import java.util.List;
 
 @Service
 public class BasePriceService {
+    private static final Logger logger = LoggerFactory.getLogger(BasePriceService.class);
+    private static final String LOG_HEADER = "[BASE PRICE CALC.]";
 
     public static final double DEFAULT_BASE_PRICE = 1000.0;
 

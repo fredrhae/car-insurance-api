@@ -1,0 +1,17 @@
+{
+  "customer":{
+    "ssn":"1234-222-123",
+    "name":"John Doe",
+    "gender":"male",
+    "date_of_birth":"1987-10-10",
+    "address":"Fools street, 100, Gotham, New Jersey",
+    "email":"john.doe@darkknight.com",
+    "phone_number":"0800 228626"
+  },
+  "vehicle":{
+    "type":"car",
+    "manufacturing_year":"2000",
+    "model":"batmobile",
+    "make":"custom"
+  }
+}

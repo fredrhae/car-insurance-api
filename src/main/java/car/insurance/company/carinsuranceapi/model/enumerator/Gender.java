@@ -1,10 +1,13 @@
 package car.insurance.company.carinsuranceapi.model.enumerator;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 import java.util.stream.Stream;
 
 public enum Gender {
-    MALE("Male"),
-    FEMALE("Female");
+    MALE("male"),
+    FEMALE("female");
 
     private String description;
 
@@ -19,6 +22,7 @@ public enum Gender {
                 .orElse(null);
     }
 
+    @JsonValue
     public  String getDescription() {
         return this.description;
     }

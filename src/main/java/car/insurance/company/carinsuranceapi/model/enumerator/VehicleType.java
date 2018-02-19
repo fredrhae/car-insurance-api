@@ -1,5 +1,7 @@
 package car.insurance.company.carinsuranceapi.model.enumerator;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 import java.util.stream.Stream;
 
 public enum VehicleType {
@@ -21,6 +23,7 @@ public enum VehicleType {
                 .orElse(null);
     }
 
+    @JsonValue
     public String getDescription(){
         return this.description;
     }

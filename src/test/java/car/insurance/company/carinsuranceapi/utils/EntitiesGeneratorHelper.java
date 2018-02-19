@@ -7,6 +7,7 @@ import car.insurance.company.carinsuranceapi.model.Vehicle;
 import car.insurance.company.carinsuranceapi.model.enumerator.Gender;
 import car.insurance.company.carinsuranceapi.model.enumerator.QuoteStatus;
 import car.insurance.company.carinsuranceapi.model.enumerator.VehicleType;
+import org.joda.time.DateTime;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,13 +18,13 @@ public class EntitiesGeneratorHelper {
     public static Customer generateCustomer4Test(){
         Random newRandom = new Random();
         return Customer.builder()
-                .birthDate(LocalDateTime.now())
+                .birthDate(DateTime.now().toDate())
                 .address("Fools's street " + newRandom.nextInt(2000))
                 .email("teste@email.com")
                 .gender((newRandom.nextInt()%2 == 0) ? Gender.MALE : Gender.FEMALE)
                 .phoneNumber("+1 123 4 567" + newRandom.nextInt(9))
                 .name("Great teste r" + newRandom.nextInt())
-                .ssn(newRandom.nextLong())
+                .ssn("12" + newRandom.nextLong())
                 .build();
     }
 
