@@ -33,7 +33,6 @@ public class VehicleRepositoryTest {
                         vehicle4Test = vehicleSaved;
                     }
                 });
-
     }
 
     @Test

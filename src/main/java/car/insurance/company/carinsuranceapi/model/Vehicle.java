@@ -31,7 +31,7 @@ public class Vehicle implements Serializable{
     private VehicleType type;
 
     @Column(name = "vehi_manufacturing_year")
-    private LocalDate manufacturingYear;
+    private String manufacturingYear;
 
     @Column(name = "vehi_model")
     private String model;
