@@ -77,4 +77,148 @@ public class BasePriceRepositoryTest {
         List<BasePrice> basePriceList = basePriceRepository.findAll();
         assertEquals(0, basePriceList.size());
     }
+
+    @Test
+    public void findByTypeAndYearAndMakeAndModelTest() {
+        String make = "TEST FIND";
+        String model = "TEST FIND MODEL";
+        String year = "2011";
+        basePriceRepository.save(
+                EntitiesGeneratorHelper.generateBasePriceToFindTest(
+                        VehicleType.MOTORCYCLE,
+                        year,
+                        model,
+                        make));
+
+        List<BasePrice> basePriceList = basePriceRepository.findByTypeAndYearAndMakeAndModelAllIgnoreCase(
+                VehicleType.MOTORCYCLE,
+                year,
+                make,
+                model
+        );
+
+        assertNotNull(basePriceList);
+        assertThat(basePriceList.size(), Matchers.greaterThanOrEqualTo(1));
+
+        basePriceList = basePriceRepository.findByTypeAndYearAndMakeAndModelAllIgnoreCase(
+                VehicleType.CAR,
+                year,
+                make,
+                model);
+
+        assertEquals(0, basePriceList.size());
+
+        basePriceList = basePriceRepository.findByTypeAndYearAndMakeAndModelAllIgnoreCase(
+                VehicleType.CAR,
+                year,
+                make,
+                model);
+
+        assertEquals(0, basePriceList.size());
+
+        basePriceList = basePriceRepository.findByTypeAndYearAndMakeAndModelAllIgnoreCase(
+                VehicleType.MOTORCYCLE,
+                "2012",
+                make,
+                model);
+
+        assertEquals(0, basePriceList.size());
+
+        basePriceList = basePriceRepository.findByTypeAndYearAndMakeAndModelAllIgnoreCase(
+                VehicleType.MOTORCYCLE,
+                year,
+                "other make",
+                model);
+
+        assertEquals(0, basePriceList.size());
+
+        basePriceList = basePriceRepository.findByTypeAndYearAndMakeAndModelAllIgnoreCase(
+                VehicleType.MOTORCYCLE,
+                year,
+                make,
+                "other model");
+
+        assertEquals(0, basePriceList.size());
+    }
+
+    @Test
+    public void findByTypeAndYearAndMakeTest() {
+        String make = "TEST FIND";
+        String year = "2011";
+        basePriceRepository.save(
+                EntitiesGeneratorHelper.generateBasePriceToFindTest(
+                        VehicleType.MOTORCYCLE,
+                        year,
+                        make));
+
+        List<BasePrice> basePriceList = basePriceRepository.findByTypeAndYearAndMakeAllIgnoreCase(
+                VehicleType.MOTORCYCLE,
+                year,
+                make);
+
+        assertNotNull(basePriceList);
+        assertThat(basePriceList.size(), Matchers.greaterThanOrEqualTo(1));
+
+        basePriceList = basePriceRepository.findByTypeAndYearAndMakeAllIgnoreCase(
+                VehicleType.TRUCK,
+                year,
+                make);
+
+        assertEquals(0, basePriceList.size());
+
+        basePriceList = basePriceRepository.findByTypeAndYearAndMakeAllIgnoreCase(
+                VehicleType.MOTORCYCLE,
+                "1989",
+                make);
+
+        assertEquals(0, basePriceList.size());
+
+        basePriceList = basePriceRepository.findByTypeAndYearAndMakeAllIgnoreCase(
+                VehicleType.MOTORCYCLE,
+                year,
+                "other make");
+
+        assertEquals(0, basePriceList.size());
+    }
+
+    @Test
+    public void findByTypeAndYearTest() {
+        String year = "2011";
+        basePriceRepository.save(
+                EntitiesGeneratorHelper.generateBasePriceToFindTest(
+                        VehicleType.MOTORCYCLE,
+                        year));
+
+        List<BasePrice> basePriceList = basePriceRepository.findByTypeAndYearAllIgnoreCase(
+                VehicleType.MOTORCYCLE,
+                year);
+
+        assertNotNull(basePriceList);
+        assertThat(basePriceList.size(), Matchers.greaterThanOrEqualTo(1));
+
+        basePriceList = basePriceRepository.findByTypeAndYearAllIgnoreCase(
+                VehicleType.TRUCK,
+                year);
+
+        assertEquals(0, basePriceList.size());
+
+        basePriceList = basePriceRepository.findByTypeAndYearAllIgnoreCase(
+                VehicleType.MOTORCYCLE,
+                "1989");
+
+        assertEquals(0, basePriceList.size());
+    }
+
+    @Test
+    public void findByTypeTest() {
+        BasePrice basePrice = basePriceRepository.save(
+                EntitiesGeneratorHelper.generateBasePriceToFindTest(
+                        VehicleType.MOTORCYCLE));
+
+        List<BasePrice> basePriceList = basePriceRepository.findByType(
+                VehicleType.MOTORCYCLE);
+
+        assertNotNull(basePriceList);
+        assertThat(basePriceList.size(), Matchers.greaterThanOrEqualTo(1));
+    }
 }

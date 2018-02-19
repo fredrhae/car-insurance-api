@@ -30,8 +30,56 @@ public class EntitiesGeneratorHelper {
     public static BasePrice generateBasePrice4Test(){
         Random newRandom = new Random();
         return BasePrice.builder()
-                .year(LocalDate.of(2000 + newRandom.nextInt(18),10,10))
+                .year(String.valueOf(2000 + newRandom.nextInt(18)))
                 .type(VehicleType.CAR)
+                .incidentAvgYear(1 + newRandom.nextDouble())
+                .model("Any model")
+                .make("Any make")
+                .basePrice(1000.0 + newRandom.nextInt(1000))
+                .build();
+    }
+
+    public static BasePrice generateBasePriceToFindTest(VehicleType type, String year, String model, String make){
+        Random newRandom = new Random();
+        return BasePrice.builder()
+                .year(year)
+                .type(type)
+                .incidentAvgYear(1 + newRandom.nextDouble())
+                .model(model)
+                .make(make)
+                .basePrice(1000.0 + newRandom.nextInt(1000))
+                .build();
+    }
+
+    public static BasePrice generateBasePriceToFindTest(VehicleType type, String year, String make){
+        Random newRandom = new Random();
+        return BasePrice.builder()
+                .year(year)
+                .type(type)
+                .incidentAvgYear(1 + newRandom.nextDouble())
+                .model("Any model")
+                .make(make)
+                .basePrice(1000.0 + newRandom.nextInt(1000))
+                .build();
+    }
+
+    public static BasePrice generateBasePriceToFindTest(VehicleType type, String year){
+        Random newRandom = new Random();
+        return BasePrice.builder()
+                .year(year)
+                .type(type)
+                .incidentAvgYear(1 + newRandom.nextDouble())
+                .model("Any model")
+                .make("Any make")
+                .basePrice(1000.0 + newRandom.nextInt(1000))
+                .build();
+    }
+
+    public static BasePrice generateBasePriceToFindTest(VehicleType type){
+        Random newRandom = new Random();
+        return BasePrice.builder()
+                .year(String.valueOf(2000 + newRandom.nextInt(18)))
+                .type(type)
                 .incidentAvgYear(1 + newRandom.nextDouble())
                 .model("Any model")
                 .make("Any make")
@@ -44,6 +92,7 @@ public class EntitiesGeneratorHelper {
         return Vehicle.builder()
                 .type(VehicleType.TRUCK)
                 .model("Any model")
+                .manufacturingYear(String.valueOf(1990 + newRandom.nextInt(28)))
                 .make("Any make")
                 .build();
     }

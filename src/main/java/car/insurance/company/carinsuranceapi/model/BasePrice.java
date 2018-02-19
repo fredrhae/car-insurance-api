@@ -29,7 +29,7 @@ public class BasePrice implements Serializable{
     private VehicleType type;
 
     @Column(name = "bapr_manufacturing_year")
-    private LocalDate year;
+    private String year;
 
     @Column(name = "bapr_model")
     private String model;
