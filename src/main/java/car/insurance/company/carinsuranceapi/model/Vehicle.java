@@ -1,7 +1,10 @@
 package car.insurance.company.carinsuranceapi.model;
 
 import car.insurance.company.carinsuranceapi.model.enumerator.VehicleType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,6 +27,7 @@ public class Vehicle implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "vehi_id")
+    @JsonIgnore
     private Long id;
 
     @Enumerated(EnumType.STRING)
@@ -31,6 +35,7 @@ public class Vehicle implements Serializable{
     private VehicleType type;
 
     @Column(name = "vehi_manufacturing_year")
+    @JsonProperty("manufacturing_year")
     private String manufacturingYear;
 
     @Column(name = "vehi_model")

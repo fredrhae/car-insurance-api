@@ -35,7 +35,8 @@ public class Quote implements Serializable{
 
     @Enumerated(EnumType.STRING)
     @Column(name = "quot_status")
-    private QuoteStatus status;
+    @Builder.Default
+    private QuoteStatus status = QuoteStatus.OPEN;
 
     @Column(name = "quot_price")
     private Double price;

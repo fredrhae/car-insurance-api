@@ -1,13 +1,13 @@
 package car.insurance.company.carinsuranceapi.model;
 
 import car.insurance.company.carinsuranceapi.model.enumerator.Gender;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Builder
 @Data
@@ -29,7 +29,7 @@ public class Customer implements Serializable {
     private Long id;
 
     @Column(name = "cust_ssn", nullable = false, unique = true)
-    private Long ssn;
+    private String ssn;
 
     @Column(name = "cust_name")
     private String name;
@@ -39,7 +39,9 @@ public class Customer implements Serializable {
     private Gender gender;
 
     @Column(name = "cust_birth_date")
-    private LocalDateTime birthDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonProperty("date_of_birth")
+    private Date birthDate;
 
     @Column(name = "cust_address")
     private String address;
@@ -48,5 +50,6 @@ public class Customer implements Serializable {
     private String email;
 
     @Column(name = "cust_phone_number")
+    @JsonProperty("phone_number")
     private String phoneNumber;
 }
