@@ -49,7 +49,7 @@ public class RestApiControllerV1 {
 
             Quote quote = quoteService.generateQuote(customerFromQuote, vehicleFromQuote);
 
-            responseRequest = new ResponseEntity(quote.getId(), HttpStatus.CREATED);
+            responseRequest = new ResponseEntity(quote.getNumber(), HttpStatus.CREATED);
 
             quoteService.processQuote(quote);
 

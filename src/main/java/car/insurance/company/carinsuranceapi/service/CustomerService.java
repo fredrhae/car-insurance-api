@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CustomerService {
     private static final Logger logger = LoggerFactory.getLogger(CustomerService.class);
@@ -21,7 +23,8 @@ public class CustomerService {
     }
 
     public Customer findCustomerBySsn(String ssn) {
-        return customerRepository.findBySsn(ssn);
+        Optional<Customer> customerFound = customerRepository.findBySsnIgnoreCase(ssn);
+        return customerFound.orElse(null);
     }
 
     public Customer saveCustomer(Customer customer) {
@@ -29,11 +32,11 @@ public class CustomerService {
     }
 
     public void updateCostumerIfAlreadyExists(Customer customerFromQuote) throws CompanyInsuranceApiException {
-        Customer customerLoaded = customerRepository.findBySsn(customerFromQuote.getSsn());
-        if(customerLoaded != null) {
+        Optional<Customer> customerLoaded = customerRepository.findBySsnIgnoreCase(customerFromQuote.getSsn());
+        if(customerLoaded.isPresent()) {
             Customer customerToUpdate = Customer.builder()
-                    .id(customerLoaded.getId())
-                    .ssn(customerLoaded.getSsn())
+                    .id(customerLoaded.get().getId())
+                    .ssn(customerLoaded.get().getSsn())
                     .name(customerFromQuote.getName())
                     .email(customerFromQuote.getEmail())
                     .birthDate(customerFromQuote.getBirthDate())

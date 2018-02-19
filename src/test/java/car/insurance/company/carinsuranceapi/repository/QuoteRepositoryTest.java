@@ -37,18 +37,18 @@ public class QuoteRepositoryTest {
 
     @Test
     public void saveQuoteTest(){
-        Quote customerLoaded = quoteRepository.findOne(quote4Test.getId());
+        Quote customerLoaded = quoteRepository.findOne(quote4Test.getNumber());
         assertNotNull(customerLoaded);
         assertEquals(quote4Test, customerLoaded);
     }
 
     @Test
     public void updateQuoteTest(){
-        Quote quoteLoaded = quoteRepository.findOne(quote4Test.getId());
+        Quote quoteLoaded = quoteRepository.findOne(quote4Test.getNumber());
         Double newPrice = 1000.0;
         quoteLoaded.setPrice(newPrice);
         quoteRepository.save(quoteLoaded);
-        Quote quoteUpdated = quoteRepository.findOne(quote4Test.getId());
+        Quote quoteUpdated = quoteRepository.findOne(quote4Test.getNumber());
         assertNotNull(quoteUpdated);
         assertEquals(newPrice, quoteUpdated.getPrice());
     }
@@ -61,8 +61,8 @@ public class QuoteRepositoryTest {
 
     @Test
     public void deleteTest(){
-        quoteRepository.delete(quote4Test.getId());
-        Quote quoteLoaded = quoteRepository.findOne(quote4Test.getId());
+        quoteRepository.delete(quote4Test.getNumber());
+        Quote quoteLoaded = quoteRepository.findOne(quote4Test.getNumber());
         assertNull(quoteLoaded);
     }
 

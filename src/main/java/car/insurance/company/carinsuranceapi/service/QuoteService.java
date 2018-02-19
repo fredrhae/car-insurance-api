@@ -52,7 +52,7 @@ public class QuoteService {
 
     @Async
     public CompletableFuture<Quote> processQuote(Quote quoteToProcess) throws InterruptedException {
-        logger.info("{} Processing quoting of number {}...", LOG_HEADER, quoteToProcess.getId());
+        logger.info("{} Processing quoting of number {}...", LOG_HEADER, quoteToProcess.getNumber());
 
         Double basePrice = basePriceService.retrieveBasePrice(quoteToProcess.getVehicle());
         logger.info("{} The base price found was {}...", LOG_HEADER, basePrice);
@@ -61,8 +61,6 @@ public class QuoteService {
                             quoteToProcess.getCustomer().getGender(),
                             quoteToProcess.getCustomer().getBirthDate());
         logger.info("{} The modifier found was {}...", LOG_HEADER, customerModifier);
-
-        Thread.sleep(10000L);
 
         logger.info("{} Finalizing the quote processing...",LOG_HEADER);
         quoteToProcess.setPrice(basePrice*customerModifier);

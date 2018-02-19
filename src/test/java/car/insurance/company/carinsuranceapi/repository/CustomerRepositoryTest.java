@@ -56,7 +56,7 @@ public class CustomerRepositoryTest {
 
     @Test
     public void findBySsn() {
-        Customer customerLoaded = customerRepository.findBySsn(customer4Test.getSsn());
+        Customer customerLoaded = customerRepository.findBySsnIgnoreCase(customer4Test.getSsn()).orElse(null);
         assertNotNull(customerLoaded);
         assertEquals(customer4Test, customerLoaded);
     }
