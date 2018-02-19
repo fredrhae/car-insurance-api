@@ -2,6 +2,7 @@ package car.insurance.company.carinsuranceapi.model;
 
 import car.insurance.company.carinsuranceapi.model.enumerator.QuoteStatus;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,10 +26,12 @@ public class Quote implements Serializable{
     @Column(name = "quot_id")
     private Long id;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;

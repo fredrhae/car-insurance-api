@@ -6,7 +6,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -22,7 +23,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(RestApiControllerV1.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 public class RestApiControllerV1Test {
 
     @Autowired
@@ -35,7 +37,8 @@ public class RestApiControllerV1Test {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
-    @Autowired private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
 
     @Value(value = "classpath:contracts_json/create_quote.json")
     private Resource createQuoteMetadata;
@@ -71,23 +74,23 @@ public class RestApiControllerV1Test {
 
     //US05
     @Test
-    public void quoteStatusTest() {
+    public void requestQuoteStatusTest() {
     }
 
     //US05 404
     @Test
-    public void quoteStatus404Test() {
+    public void requestQuoteStatus404Test() {
     }
 
 
     //US06
     @Test
-    public void quoteInformationTest() {
+    public void requestQuoteInformationTest() {
     }
 
     //US06 404
     @Test
-    public void quoteInformation404Test() {
+    public void requestQuoteInformation404Test() {
     }
 
 }

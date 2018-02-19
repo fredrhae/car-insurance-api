@@ -49,7 +49,7 @@ public class RestApiControllerV1 {
 
             Quote quote = quoteService.generateQuote(customerFromQuote, vehicleFromQuote);
 
-            responseRequest = new ResponseEntity(quote.getId(), HttpStatus.OK);
+            responseRequest = new ResponseEntity(quote.getId(), HttpStatus.CREATED);
 
             quoteService.processQuote(quote);
 
@@ -65,17 +65,39 @@ public class RestApiControllerV1 {
 
 
 
+    @Async
     @CrossOrigin
-    @GetMapping(value = "/quote/status", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE})
-    public CompletableFuture<ResponseEntity<Quote>> quoteStatus()
+    @GetMapping(value = "/quote/status/{number}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE})
+    public CompletableFuture<ResponseEntity<Quote>> quoteStatus(@PathVariable("number") Long number)
     {
-        return null;
+        logger.info("{} Retrieving quote status for the following number: {}", LOG_HEADER, number);
+
+        ResponseEntity responseRequest = new ResponseEntity(HttpStatus.NOT_FOUND);
+        Quote quote = quoteService.findQuoteByNumber(number);
+
+        if(quote != null) {
+            logger.info("{} Quote found returning it: {}", LOG_HEADER, quote);
+            responseRequest = new ResponseEntity(quote, HttpStatus.OK);
+        }
+        return CompletableFuture.completedFuture(responseRequest);
     }
 
     @CrossOrigin
-    @GetMapping(value = "/quote/information", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE})
-    public CompletableFuture<ResponseEntity<Quote>> quoteInformation()
+    @GetMapping(value = "/quote/information/{number}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE})
+    public CompletableFuture<ResponseEntity<QuoteMetadata>> quoteInformation(@PathVariable("number") Long number)
     {
-        return null;
-    }
+        logger.info("{} Retrieving quote metadata for the following number: {}", LOG_HEADER, number);
+
+        ResponseEntity responseRequest = new ResponseEntity(HttpStatus.NOT_FOUND);
+
+        Quote quote = quoteService.findQuoteByNumber(number);
+
+        if(quote != null) {
+            logger.info("{} Quote found returning it information: Customer - {}, Vehicle - {}", LOG_HEADER,
+                    quote.getCustomer(), quote.getVehicle());
+
+            QuoteMetadata quoteMetadata = new QuoteMetadata(quote.getCustomer(),quote.getVehicle());
+            responseRequest = new ResponseEntity(quoteMetadata, HttpStatus.OK);
+        }
+        return CompletableFuture.completedFuture(responseRequest);    }
 }

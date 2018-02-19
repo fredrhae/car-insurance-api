@@ -45,6 +45,10 @@ public class QuoteService {
         return quoteRepository.save(quoteToSave);
     }
 
+    public Quote findQuoteByNumber(Long number) {
+        return quoteRepository.findOne(number);
+    }
+
 
     @Async
     public CompletableFuture<Quote> processQuote(Quote quoteToProcess) throws InterruptedException {
@@ -57,6 +61,8 @@ public class QuoteService {
                             quoteToProcess.getCustomer().getGender(),
                             quoteToProcess.getCustomer().getBirthDate());
         logger.info("{} The modifier found was {}...", LOG_HEADER, customerModifier);
+
+        Thread.sleep(10000L);
 
         logger.info("{} Finalizing the quote processing...",LOG_HEADER);
         quoteToProcess.setPrice(basePrice*customerModifier);

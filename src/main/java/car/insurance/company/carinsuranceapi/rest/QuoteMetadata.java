@@ -3,15 +3,14 @@ package car.insurance.company.carinsuranceapi.rest;
 import car.insurance.company.carinsuranceapi.model.Customer;
 import car.insurance.company.carinsuranceapi.model.Vehicle;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Setter
 @Getter
 @ToString
 @EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class QuoteMetadata {
 
