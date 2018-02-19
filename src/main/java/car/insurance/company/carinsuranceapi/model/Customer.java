@@ -15,7 +15,6 @@ import java.util.Date;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 @Table(name ="customer")
 public class Customer implements Serializable {

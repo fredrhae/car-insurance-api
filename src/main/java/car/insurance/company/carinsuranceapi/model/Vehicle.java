@@ -17,7 +17,6 @@ import java.time.LocalDate;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 @Table(name = "vehicle")
 public class Vehicle implements Serializable{
