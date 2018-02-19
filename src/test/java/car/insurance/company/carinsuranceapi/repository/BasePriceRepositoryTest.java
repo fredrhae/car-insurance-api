@@ -37,7 +37,6 @@ public class BasePriceRepositoryTest {
                         basePrice4Test = basePriceSaved;
                     }
                 });
-
     }
 
     @Test

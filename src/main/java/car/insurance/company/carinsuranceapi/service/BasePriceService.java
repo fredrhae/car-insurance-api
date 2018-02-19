@@ -1,12 +1,59 @@
 package car.insurance.company.carinsuranceapi.service;
 
+import car.insurance.company.carinsuranceapi.model.BasePrice;
 import car.insurance.company.carinsuranceapi.model.Vehicle;
+import car.insurance.company.carinsuranceapi.repository.BasePriceRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class BasePriceService {
 
+    public static final double DEFAULT_BASE_PRICE = 1000.0;
+
+    private final BasePriceRepository basePriceRepository;
+
+    @Autowired
+    public BasePriceService(final BasePriceRepository basePriceRepository)
+    {
+        this.basePriceRepository = basePriceRepository;
+    }
+
     public Double retrieveBasePrice(Vehicle vehicle) {
-        return null;
+        List<BasePrice> basePriceList = basePriceRepository.findByTypeAndYearAndMakeAndModelAllIgnoreCase(
+                vehicle.getType(),
+                vehicle.getManufacturingYear(),
+                vehicle.getMake(),
+                vehicle.getModel()
+        );
+
+        if(basePriceList.isEmpty()) {
+            basePriceList = basePriceRepository.findByTypeAndYearAndMakeAllIgnoreCase(
+                    vehicle.getType(),
+                    vehicle.getManufacturingYear(),
+                    vehicle.getMake()
+            );
+
+            if(basePriceList.isEmpty()) {
+                basePriceList = basePriceRepository.findByTypeAndYearAllIgnoreCase(
+                        vehicle.getType(),
+                        vehicle.getManufacturingYear()
+                );
+
+                if(basePriceList.isEmpty()) {
+                    basePriceList = basePriceRepository.findByType(
+                            vehicle.getType()
+                    );
+                }
+            }
+        }
+
+        if(basePriceList.size() > 0){
+            return basePriceList.get(0).getBasePrice();
+        }
+
+        return DEFAULT_BASE_PRICE;
     }
 }
