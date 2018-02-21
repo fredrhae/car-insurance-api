@@ -27,6 +27,10 @@ public class CustomerService {
         return customerFound.orElse(null);
     }
 
+    public Customer findCustomerById(Long id) {
+        return customerRepository.findOne(id);
+    }
+
     public Customer saveCustomer(Customer customer) {
         return customerRepository.save(customer);
     }

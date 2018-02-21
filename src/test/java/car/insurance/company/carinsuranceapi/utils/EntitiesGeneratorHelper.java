@@ -11,14 +11,16 @@ import org.joda.time.DateTime;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Random;
 
 public class EntitiesGeneratorHelper {
 
     public static Customer generateCustomer4Test(){
         Random newRandom = new Random();
+        Date birthDate = new DateTime(1990, 1, 1, 1, 1, 1).toDate();
         return Customer.builder()
-                .birthDate(DateTime.now().toDate())
+                .birthDate(birthDate)
                 .address("Fools's street " + newRandom.nextInt(2000))
                 .email("teste@email.com")
                 .gender((newRandom.nextInt()%2 == 0) ? Gender.MALE : Gender.FEMALE)
